@@ -1,6 +1,5 @@
 package PositiveTests;
 
-import com.codeborne.selenide.ElementsCollection;
 import org.testng.annotations.Test;
 import BeforeTests.*;
 
@@ -13,7 +12,6 @@ public class RequiredFieldsSmokeTest extends BeforeTests {
     //отправка обязательных параметров
     @Test
     void sendingRequiredFieldsTest() {
-        open("https://demoqa.com/automation-practice-form");
         //Указываем имя и фамилию
         $("#firstName").setValue("Pavel");
         $("#lastName").setValue("Ogorodnikov");
@@ -37,12 +35,10 @@ public class RequiredFieldsSmokeTest extends BeforeTests {
 
         //проверяем что модалка появилась
         $(".modal-header").shouldBe(visible);
-        //Создаем объект resultLinks класса ElementsCollection, в котором ссылаемся на коллекцию веб-элементов таблицы
-        ElementsCollection resultLinks = $$("table.table-dark.table-striped.table-bordered.table-hover tbody tr");
         //обращаемся к каждому элементу коллекции и проверяем введенные значения
-        List<String> results = List.of("Pavel Ogorodnikov","asap@mail.ru","Male","1234567890"
-        ,"18 September,1986","Subjects","Hobbies","Picture","Sovetskaya 28, d35","State and City");
-        for (int i = 0; i < results.size(); i++){
+        List<String> results = List.of("Pavel Ogorodnikov", "asap@mail.ru", "Male", "1234567890"
+                , "18 September,1986", "Subjects", "Hobbies", "Picture", "Sovetskaya 28, d35", "State and City");
+        for (int i = 0; i < results.size(); i++) {
             resultLinks.get(i).shouldHave(text(results.get(i)));
         }
     }

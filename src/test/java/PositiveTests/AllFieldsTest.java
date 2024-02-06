@@ -1,6 +1,5 @@
 package PositiveTests;
 
-import com.codeborne.selenide.ElementsCollection;
 import org.testng.annotations.Test;
 import BeforeTests.*;
 
@@ -15,7 +14,6 @@ public class AllFieldsTest extends BeforeTests {
     //Заполнение всех полей, с различными комбинациями
     @Test
     void sendingAllFields() {
-        open("https://demoqa.com/automation-practice-form");
         //Указываем имя и фамилию
         $("#firstName").setValue("Anna-Nicole");
         $("#lastName").setValue("Wolfeschlegelsteinhausenbergerdorff Sr.");
@@ -38,23 +36,23 @@ public class AllFieldsTest extends BeforeTests {
         $("#uploadPicture").uploadFile(new File("src/test/java/sample-clouds-400x300.jpg"));
         //адрес
         $("#currentAddress").setValue("Katip Kasım, Hayriye Tüccarı Cd. 29/B, 34130 Fatih/İstanbul, Турция");
-        //штат и город
-        $x("//div[text()='Select State']/..").setValue("NCR");
-        $("#city").setValue("Delhi").pressEnter();
+        //Выбираем штат и город из скрытых списков
+        $x("//div[text()='Select State']").click();
+        $("#react-select-3-option-0").click(); //NCR
+        $x("//div[text()='Select City']").click();
+        $("#react-select-4-option-1").click(); //Gurgaon
         //отправка
         $("#submit").click();
 
         //проверяем что модалка появилась
         $(".modal-header").shouldBe(visible);
         //проверяем все значения
-        ElementsCollection resultLinks = $$("table.table-dark.table-striped.table-bordered.table-hover tbody tr");
-        System.out.println(resultLinks.size());
-        List<String> results = List.of("Anna-Nicole Wolfeschlegelsteinhausenbergerdorff Sr.","Treat23@user.com.uk",
-                "Female","1796535746","22.01.2012","Maths, English, Economics",
-                "Reading","sample-clouds-400x300.jpg",
-                "Katip Kasım, Hayriye Tüccarı Cd. 29/B, 34130 Fatih/İstanbul, Турция","State and City",
-                "NCR Delhi");
-        for (int i = 0; i < results.size(); i++){
+        List<String> results = List.of("Anna-Nicole Wolfeschlegelsteinhausenbergerdorff Sr.", "Treat23@user.com.uk",
+                "Female", "1796535746", "22.01.2012", "Maths, English, Economics",
+                "Reading", "sample-clouds-400x300.jpg",
+                "Katip Kasım, Hayriye Tüccarı Cd. 29/B, 34130 Fatih/İstanbul, Турция", "State and City",
+                "NCR Gurgaon");
+        for (int i = 0; i < results.size(); i++) {
             resultLinks.get(i).shouldHave(text(results.get(i)));
         }
     }
