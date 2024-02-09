@@ -1,18 +1,20 @@
 package NegativeTests;
 
 import BeforeTests.BeforeTests;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.cssValue;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class EmailTest extends BeforeTests {
-    @Test(priority = 1)
-    void emptyEmailTest() {
+    //устанавливаем логическую переменную для выполнения аннотации AfterTest
+    private boolean refreshPage = true;
+    @Test
+    void sendEmptyEmailTest() {
         //Оставляем поле Email пустым
         $("#firstName").setValue("TESTTESTST");
         $("#lastName").setValue("Beckham");
@@ -28,9 +30,14 @@ public class EmailTest extends BeforeTests {
         //Проверяем что границы поля окрашены в красный цвет
         $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
-
-    @Test(priority = 0)
-    void invalidFormatEmailTest() {
+    @AfterMethod()
+    void shouldRefreshPage() {
+        if (refreshPage)
+            refresh();
+        refreshPage = false;
+    }
+    @Test(priority = 1)
+    void sendInvalidFormatEmailTest() {
         var options = List.of("@asapmail.ru", "aa@asapmail.ru.", "you.ru", "name@example", "frosya 33@mail.ru");
         options.forEach(option -> {
             $("#firstName").setValue("TESTTESTST");

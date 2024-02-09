@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class RequiredFieldsSmokeTest extends BeforeTests {
     //отправка обязательных параметров
     @Test
-    void sendingRequiredFieldsTest() {
+    void sendRequiredFieldsTest() {
         //Указываем имя и фамилию
         $("#firstName").setValue("Pavel");
         $("#lastName").setValue("Ogorodnikov");
@@ -35,8 +35,9 @@ public class RequiredFieldsSmokeTest extends BeforeTests {
 
         //проверяем что модалка появилась
         $(".modal-header").shouldBe(visible);
-        //обращаемся к каждому элементу коллекции и проверяем введенные значения
-        List<String> results = List.of("Pavel Ogorodnikov", "asap@mail.ru", "Male", "1234567890"
+        //Обращаемся к каждому элементу коллекции и проверяем введенные значения
+        //Где не вводились значения, указал просто название строки
+        var results = List.of("Pavel Ogorodnikov", "asap@mail.ru", "Male", "1234567890"
                 , "18 September,1986", "Subjects", "Hobbies", "Picture", "Sovetskaya 28, d35", "State and City");
         for (int i = 0; i < results.size(); i++) {
             resultLinks.get(i).shouldHave(text(results.get(i)));
