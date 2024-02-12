@@ -12,15 +12,13 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AllFieldsTest extends BeforeTests {
-    //устанавливаем логическую переменную для выполнения аннотации AfterTest
-    private boolean refreshPage = true;
-    @AfterMethod()
+    @AfterMethod(onlyForGroups = {"refresh"})
     void shouldRefreshPage() {
-        if (refreshPage)
-            refresh();
+        refresh();
     }
+
     //Заполнение всех полей, с различными комбинациями
-    @Test()
+    @Test(groups = {"refresh"})
     void sendAllFieldsTest() {
         //Указываем имя и фамилию
         $("#firstName").setValue("Anna-Nicole");
@@ -65,7 +63,7 @@ public class AllFieldsTest extends BeforeTests {
         }
     }
 
-    @Test(priority = 1)
+    @Test(groups = {"refresh"})
     void sendEmptySubjectsAndFullHobbiesTest() {
         //Оставим пустым поле subjects и отметим все чекбоксы hobbies
         $("#firstName").setValue("Anna-Nicole");
@@ -109,10 +107,9 @@ public class AllFieldsTest extends BeforeTests {
             resultLinks.get(i).shouldHave(text(results.get(i)));
         }
     }
+
     @Test(priority = 2)
     void sendEmptyCityTest() {
-        //отключаем обновление страницы
-        refreshPage = false;
         //Заполняем обязательные поля + State. City оставляем пустым
         $("#firstName").setValue("George Ant");
         $("#lastName").setValue("Expect-Test");

@@ -10,9 +10,12 @@ import static com.codeborne.selenide.Selenide.*;
 
 
 public class StateAndCityTest extends BeforeTests {
-    //устанавливаем логическую переменную для выполнения аннотации AfterTest
-    private boolean refreshPage = true;
-    @Test
+    @AfterMethod(onlyForGroups = {"refresh"})
+    void shouldRefreshPage() {
+        refresh();
+    }
+
+    @Test(groups = {"refresh"})
     void sendInvalidFormatStateTest() {
         $("#firstName").setValue("Anna-Nicole");
         $("#lastName").setValue("Wolfeschlegelsteinhausenbergerdorff Sr.");
@@ -36,14 +39,9 @@ public class StateAndCityTest extends BeforeTests {
         //проверка что State and City в модалке пустое
         resultLinks.get(9).shouldNotHave(text("ffdgs"));
     }
-    @AfterMethod()
-    void shouldRefreshPage() {
-        if (refreshPage)
-            refresh();
-        refreshPage = false;
-    }
+
     @Test(priority = 1)
-    void sendInvalidFormatCityTest(){
+    void sendInvalidFormatCityTest() {
         $("#firstName").setValue("Anna-Nicole");
         $("#lastName").setValue("Wolfeschlegelsteinhausenbergerdorff Sr.");
         //Заполняем email

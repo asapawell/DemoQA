@@ -9,10 +9,12 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class LastNameTest extends BeforeTests {
-    //устанавливаем логическую переменную для выполнения аннотации AfterTest
-    private boolean refreshPage = true;
+    @AfterMethod(onlyForGroups = {"refresh"})
+    void shouldRefreshPage() {
+        refresh();
+    }
 
-    @Test()
+    @Test(groups = {"refresh"})
     void emptyLastNameTest() {
         //Оставляем поле Last Name пустым, остальные обязательные заполняем
         $("#firstName").setValue("TESTTESTST");
@@ -36,13 +38,6 @@ public class LastNameTest extends BeforeTests {
 
         //Проверяем что границы поля окрашены в красный цвет
         $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-    }
-
-    @AfterMethod()
-    void shouldRefreshPage() {
-        if (refreshPage)
-            refresh();
-        refreshPage = false;
     }
 
     @Test(priority = 1)

@@ -11,9 +11,12 @@ import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EmailTest extends BeforeTests {
-    //устанавливаем логическую переменную для выполнения аннотации AfterTest
-    private boolean refreshPage = true;
-    @Test
+    @AfterMethod(onlyForGroups = {"refresh"})
+    void shouldRefreshPage() {
+        refresh();
+    }
+
+    @Test(groups = {"refresh"})
     void sendEmptyEmailTest() {
         //Оставляем поле Email пустым
         $("#firstName").setValue("TESTTESTST");
@@ -30,12 +33,7 @@ public class EmailTest extends BeforeTests {
         //Проверяем что границы поля окрашены в красный цвет
         $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
-    @AfterMethod()
-    void shouldRefreshPage() {
-        if (refreshPage)
-            refresh();
-        refreshPage = false;
-    }
+
     @Test(priority = 1)
     void sendInvalidFormatEmailTest() {
         var options = List.of("@asapmail.ru", "aa@asapmail.ru.", "you.ru", "name@example", "frosya 33@mail.ru");

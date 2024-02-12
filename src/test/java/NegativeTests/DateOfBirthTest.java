@@ -9,10 +9,12 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class DateOfBirthTest extends BeforeTests {
-    //устанавливаем логическую переменную для выполнения аннотации AfterTest
-    private boolean refreshPage = true;
+    @AfterMethod(onlyForGroups = {"refresh"})
+    void shouldRefreshPage() {
+        refresh();
+    }
     //оставляем пустым dateOfBirthInput
-    @Test
+    @Test(groups = {"refresh"})
     void sendEmptyDateOfBirthTest() {
         $("#firstName").setValue("Pavel");
         $("#lastName").setValue("Ogorodnikov");
@@ -30,12 +32,7 @@ public class DateOfBirthTest extends BeforeTests {
         //Проверяем что границы поля окрашены в красный цвет
         $("#dateOfBirthInput").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
-    @AfterMethod()
-    void shouldRefreshPage() {
-        if (refreshPage)
-            refresh();
-        refreshPage = false;
-    }
+
     @Test(priority = 1)
     void sendFutureDateOfBirthTest(){
         $("#firstName").setValue("Pavel");

@@ -9,10 +9,12 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class MobileTest extends BeforeTests {
-    //устанавливаем логическую переменную для выполнения аннотации AfterTest
-    private boolean refreshPage = true;
+    @AfterMethod(onlyForGroups = {"refresh"})
+    void shouldRefreshPage() {
+        refresh();
+    }
 
-    @Test
+    @Test(groups = {"refresh"})
     void sendEmptyMobileTest() {
         //оставляем поле userNumber пустым, остальные заполняем
         $("#firstName").setValue("Marcus");
@@ -28,13 +30,6 @@ public class MobileTest extends BeforeTests {
 
         //Проверяем что границы поля окрашены в красный цвет
         $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-    }
-
-    @AfterMethod()
-    void shouldRefreshPage() {
-        if (refreshPage)
-            refresh();
-        refreshPage = false;
     }
 
     @Test(priority = 1)
