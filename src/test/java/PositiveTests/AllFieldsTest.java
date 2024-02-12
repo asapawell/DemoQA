@@ -39,7 +39,7 @@ public class AllFieldsTest extends BeforeTests {
             $("label[for='hobbies-checkbox-" + i + "']").click();
         }
         //загрузим картинку
-        $("#uploadPicture").uploadFile(new File("src/test/java/sample-clouds-400x300.jpg"));
+        $("#uploadPicture").uploadFile(new File("src/test/resources/sample-clouds-400x300.jpg"));
         //адрес
         $("#currentAddress").setValue("Katip Kasım, Hayriye Tüccarı Cd. 29/B, 34130 Fatih/İstanbul, Турция");
         //Выбираем штат и город из скрытых списков
@@ -84,7 +84,7 @@ public class AllFieldsTest extends BeforeTests {
             $("label[for='hobbies-checkbox-" + i + "']").click();
         }
         //загрузим картинку
-        $("#uploadPicture").uploadFile(new File("src/test/java/sample-clouds-400x300.jpg"));
+        $("#uploadPicture").uploadFile(new File("src/test/resources/sample-clouds-400x300.jpg"));
         //адрес
         $("#currentAddress").setValue("Katip Kasım, Hayriye Tüccarı Cd. 29/B, 34130 Fatih/İstanbul, Турция");
         //Выбираем штат и город из скрытых списков
