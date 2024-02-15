@@ -14,7 +14,7 @@ public class RegistrationPage {
     SelenideElement lastNameInput = $("#lastName");
     SelenideElement emailInput = $("#userEmail");
 
-    //В метод передаем число три варианта пола
+    //В метод передаем три варианта пола
     public SelenideElement getGenderRadio(String value) {
         return $x("//label[text()='" + value + "']");
     }
