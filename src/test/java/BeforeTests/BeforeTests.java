@@ -2,10 +2,8 @@ package BeforeTests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 
-import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
