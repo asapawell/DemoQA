@@ -1,7 +1,6 @@
 package Pages.components;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class StateAndCityComponents {
             "Haryana", List.of("Karnal", "Panipat"),
             "Rajasthan", List.of("Jaipur", "Jaiselmer")
     );
-    public static List<String> keys = new ArrayList<>(citiesByState.keySet());
+
     public void selectStateAndCity(String state, String city) {
         $("#state").click();
         $(byText(state)).click();
@@ -25,7 +24,8 @@ public class StateAndCityComponents {
         $("#city").click();
         $(byText(city)).click();
     }
-    public void selectStateAndCity(String state){
+
+    public void selectStateAndCity(String state) {
         $("#state").click();
         $(byText(state)).click();
     }
