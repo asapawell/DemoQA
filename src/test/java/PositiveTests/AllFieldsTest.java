@@ -1,18 +1,17 @@
 package PositiveTests;
 
-import Pages.RegistrationPage;
+import baseTest.BaseTest;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import BeforeTests.*;
 
-import static Pages.testData.TestData.*;
+import static org.example.utils.TestData.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.example.AppConfig.baseUrl;
 
 //Заполнение всех полей, с различными комбинациями
-public class AllFieldsTest extends BeforeTests {
+public class AllFieldsTest extends BaseTest {
     //Заполним все поля
-    RegistrationPage registrationPage = new RegistrationPage();
-
     @AfterMethod(onlyForGroups = {"refresh"})
     void shouldRefreshPage() {
         refresh();
@@ -20,7 +19,10 @@ public class AllFieldsTest extends BeforeTests {
 
     @Test(groups = {"refresh"})
     void sendAllFieldsTest() {
-        registrationPage.setFirstName(validFirstName) //имя
+        basePage.openPage(baseUrl);
+
+        registrationPage
+                .setFirstName(validFirstName) //имя
                 .setLastName(validLastName) //фамилия
                 .setUserEmail(validEmail) //почта
                 .clickOnGender(gender) //пол
@@ -34,9 +36,11 @@ public class AllFieldsTest extends BeforeTests {
                 .clickOnSubmit(); //жмем на кнопку отправки
 
         //проверка, что появилось модальное окно
-        registrationPage.checkModalContent();
+        resultsPage
+                .checkModalContent();
         //проверка, что введенные значения корректно отображаются в соответствующих полях
-        registrationPage.checkResults("Student Name", validFirstName + " " + validLastName)
+        resultsPage
+                .checkResults("Student Name", validFirstName + " " + validLastName)
                 .checkResults("Student Email", validEmail)
                 .checkResults("Gender", gender)
                 .checkResults("Mobile", mobileNumber)
@@ -50,8 +54,10 @@ public class AllFieldsTest extends BeforeTests {
 
     @Test(priority = 2)
     void sendEmptyCityTest() {
+        basePage.openPage(baseUrl);
         //Поле city пустое
-        registrationPage.setFirstName(validFirstName) //имя
+        registrationPage
+                .setFirstName(validFirstName) //имя
                 .setLastName(validLastName) //фамилия
                 .setUserEmail(validEmail) //почта
                 .clickOnGender(gender) //пол
@@ -65,9 +71,11 @@ public class AllFieldsTest extends BeforeTests {
                 .clickOnSubmit(); //жмем на кнопку отправки
 
         //проверка, что появилось модальное окно
-        registrationPage.checkModalContent();
+        resultsPage
+                .checkModalContent();
         //проверка, что введенные значения корректно отображаются в соответствующих полях
-        registrationPage.checkResults("Student Name", validFirstName + " " + validLastName)
+        resultsPage
+                .checkResults("Student Name", validFirstName + " " + validLastName)
                 .checkResults("Student Email", validEmail)
                 .checkResults("Gender", gender)
                 .checkResults("Mobile", mobileNumber)

@@ -1,4 +1,4 @@
-package Pages.components;
+package org.example.utils.components;
 
 
 import java.util.List;

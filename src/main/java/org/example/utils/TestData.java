@@ -1,11 +1,10 @@
-package Pages.testData;
+package org.example.utils;
 
 import com.github.javafaker.Faker;
+import org.example.utils.components.StateAndCityComponents;
 
 import java.time.Year;
 import java.util.*;
-
-import static Pages.components.StateAndCityComponents.citiesByState;
 
 public class TestData {
     public static Random rnd = new Random();
@@ -34,24 +33,23 @@ public class TestData {
     //генерация хобби
     public static List<String> hobbies = randomHobbies();
     //путь к файлу
-    public static String pathToPicture = "src/test/resources/sample-clouds-400x300.jpg";
+    public static String pathToPicture = "src/main/resources/sample-clouds-400x300.jpg";
     //название файла
     public static String picture = "sample-clouds-400x300.jpg";
     //генерация адреса
     public static String address = faker.address().fullAddress();
     //Помещаем ключи в список keys. Map citiesByState лежит в компонентах штат и город
-    public static List<String> keys = new ArrayList<>(citiesByState.keySet());
+    public static List<String> keys = new ArrayList<>(StateAndCityComponents.citiesByState.keySet());
     //выбор рандомного штата
     public static String state = keys.get(rnd.nextInt(keys.size()));
     //Помещаем значения в список values. Значения зависят от ключа
-    public static List<String> values = citiesByState.get(state);
+    public static List<String> values = StateAndCityComponents.citiesByState.get(state);
     //выбор рандомного города
     public static String city = values.get(rnd.nextInt(values.size()));
     public static String modalTextHeader = "Thanks for submitting the form";
     public static String closeText = "Close";
 
     /**
-     *
      * Методы для генерации значений
      */
 
@@ -70,6 +68,7 @@ public class TestData {
         var genders = List.of("Male", "Female", "Other");
         return genders.get(rnd.nextInt(2));
     }
+
     //Задаем метод formatDay. Передаем numberBetween числа от 1 до 28 (чтоб февраль не ломался и месяца, где по 30 дней,
     //а то писать долго придется.)
     //Возвращаем условие: если сгенерированное число меньше 10, то добавляем 0 спереди
@@ -106,13 +105,14 @@ public class TestData {
                 .limit(numValues)
                 .toList();
     }
+
     public static List<String> randomHobbies() {
         Random rnd = new Random();
         List<String> hobbies = new ArrayList<>();
-        Collections.addAll(hobbies,"Sports", "Reading", "Music");
+        Collections.addAll(hobbies, "Sports", "Reading", "Music");
         Collections.shuffle(hobbies);
         return hobbies.stream()
-                .limit(rnd.nextInt(1,hobbies.size()))
+                .limit(rnd.nextInt(1, hobbies.size()))
                 .toList();
     }
 }

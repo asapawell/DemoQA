@@ -1,18 +1,22 @@
 package PositiveTests;
 
-import Pages.RegistrationPage;
+import baseTest.BaseTest;
 import org.testng.annotations.Test;
-import BeforeTests.*;
 
-import static Pages.testData.TestData.*;
+
+import static org.example.AppConfig.baseUrl;
+import static org.example.utils.TestData.*;
+
 
 //Тест на отправку обязательных параметров
-public class RequiredFieldsSmokeTest extends BeforeTests {
-    RegistrationPage registrationPage = new RegistrationPage();
+public class RequiredFieldsSmokeTest extends BaseTest {
 
     @Test
     void sendRequiredFieldsTest() {
-        registrationPage.setFirstName(validFirstName) //имя
+        basePage.openPage(baseUrl);
+
+        registrationPage
+                .setFirstName(validFirstName) //имя
                 .setLastName(validLastName) //фамилия
                 .setUserEmail(validEmail) //почта
                 .clickOnGender(gender) //пол
@@ -22,9 +26,11 @@ public class RequiredFieldsSmokeTest extends BeforeTests {
                 .clickOnSubmit(); //жмем на кнопку отправки
 
         //проверка, что появилось модальное окно
-        registrationPage.checkModalContent();
+        resultsPage
+                .checkModalContent();
         //проверка, что введенные значения корректно отображаются в соответствующих полях
-        registrationPage.checkResults("Student Name", validFirstName + " " + validLastName)
+        resultsPage
+                .checkResults("Student Name", validFirstName + " " + validLastName)
                 .checkResults("Student Email", validEmail)
                 .checkResults("Gender", gender)
                 .checkResults("Mobile", mobileNumber)

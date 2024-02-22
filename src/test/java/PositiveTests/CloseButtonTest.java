@@ -1,17 +1,20 @@
 package PositiveTests;
 
-import BeforeTests.BeforeTests;
-import Pages.RegistrationPage;
+import baseTest.BaseTest;
 import org.testng.annotations.Test;
 
-import static Pages.testData.TestData.*;
 
-public class CloseButtonTest extends BeforeTests {
-    RegistrationPage registrationPage = new RegistrationPage();
+import static org.example.utils.TestData.*;
+import static org.example.AppConfig.baseUrl;
+
+public class CloseButtonTest extends BaseTest {
 
     @Test
     void clickOnCloseButtonTest() {
-        registrationPage.setFirstName(validFirstName) //имя
+        basePage.openPage(baseUrl);
+
+        registrationPage
+                .setFirstName(validFirstName) //имя
                 .setLastName(validLastName) //фамилия
                 .setUserEmail(validEmail) //почта
                 .clickOnGender(gender) //пол
@@ -21,8 +24,10 @@ public class CloseButtonTest extends BeforeTests {
                 .clickOnSubmit(); //жмем на кнопку отправки
 
         //проверка, что появилось модальное окно с заголовком и кнопкой закрыть
-        registrationPage.checkModalContent();
+        resultsPage
+                .checkModalContent();
         //Проверка работы кнопки Close и то, что после закрытия не отображается модальное окно
-        registrationPage.clickOnClose();
+        resultsPage
+                .clickOnClose();
     }
 }
