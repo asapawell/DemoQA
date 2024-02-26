@@ -11,6 +11,7 @@ public class TestData {
     public static Faker faker = new Faker();
     //генерация имени
     public static String validFirstName = faker.name().firstName();
+
     //генерация фамилии
     public static String validLastName = faker.name().lastName();
     //генерация email

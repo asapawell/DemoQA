@@ -9,7 +9,7 @@ import static org.example.AppConfig.baseUrl;
 
 public class CloseButtonTest extends BaseTest {
 
-    @Test
+    @Test(alwaysRun = true)
     void clickOnCloseButtonTest() {
         basePage.openPage(baseUrl);
 

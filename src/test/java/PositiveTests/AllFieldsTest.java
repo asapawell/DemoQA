@@ -12,12 +12,12 @@ import static org.example.AppConfig.baseUrl;
 //Заполнение всех полей, с различными комбинациями
 public class AllFieldsTest extends BaseTest {
     //Заполним все поля
-    @AfterMethod(onlyForGroups = {"refresh"})
+    @AfterMethod(onlyForGroups = {"refresh"},alwaysRun = true)
     void shouldRefreshPage() {
         refresh();
     }
 
-    @Test(groups = {"refresh"})
+    @Test(groups = {"refresh"},alwaysRun = true)
     void sendAllFieldsTest() {
         basePage.openPage(baseUrl);
 
@@ -52,7 +52,7 @@ public class AllFieldsTest extends BaseTest {
                 .checkResults("Address", address);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2,alwaysRun = true)
     void sendEmptyCityTest() {
         basePage.openPage(baseUrl);
         //Поле city пустое

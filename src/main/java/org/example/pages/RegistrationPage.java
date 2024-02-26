@@ -15,18 +15,15 @@ import static com.codeborne.selenide.Selenide.$x;
 
 
 public class RegistrationPage extends BasePage {
-    SelenideElement firstNameInput = $("#firstName");
-    SelenideElement lastNameInput = $("#lastName");
-    SelenideElement emailInput = $("#userEmail");
-
-    SelenideElement numberInput = $("#userNumber");
-    CalendarComponents calendarComponents = new CalendarComponents();
-
-    SelenideElement addressInput = $("#currentAddress");
-    SelenideElement subjectContainer = $("#subjectsContainer input");
-
-    SelenideElement uploadPictureButton = $("#uploadPicture");
-    StateAndCityComponents stateAndCityComponents = new StateAndCityComponents();
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement emailInput = $("#userEmail");
+    private final SelenideElement numberInput = $("#userNumber");
+    private final CalendarComponents calendarComponents = new CalendarComponents();
+    private final SelenideElement addressInput = $("#currentAddress");
+    private final SelenideElement subjectContainer = $("#subjectsContainer input");
+    private final SelenideElement uploadPictureButton = $("#uploadPicture");
+    private final StateAndCityComponents stateAndCityComponents = new StateAndCityComponents();
 
     SelenideElement submitButton = $("#submit");
 

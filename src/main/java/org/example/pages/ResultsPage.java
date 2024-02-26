@@ -13,9 +13,9 @@ import static org.example.utils.TestData.modalTextHeader;
 
 //ResultPage не расширяет класс BasePage, т.к. не открывается новый урл
 public class ResultsPage {
-    SelenideElement modalContent = $(".modal-content");
-    SelenideElement resultsTable = $(".table-responsive");
-    SelenideElement closeButton = $("#closeLargeModal");
+    private final SelenideElement modalContent = $(".modal-content");
+    private final SelenideElement resultsTable = $(".table-responsive");
+    private final SelenideElement closeButton = $("#closeLargeModal");
 
     public void checkModalContent() {
         modalContent.shouldBe(visible).shouldHave(text(modalTextHeader));

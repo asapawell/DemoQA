@@ -11,7 +11,7 @@ import static org.example.utils.TestData.*;
 //Тест на отправку обязательных параметров
 public class RequiredFieldsSmokeTest extends BaseTest {
 
-    @Test
+    @Test(alwaysRun = true)
     void sendRequiredFieldsTest() {
         basePage.openPage(baseUrl);
 

@@ -10,7 +10,11 @@ import static com.codeborne.selenide.Selenide.open;
 import static java.time.Duration.ofSeconds;
 
 public class BasePage {
-    SelenideElement userForm = $x("//*[@id='userForm']");
+    private final SelenideElement userForm = $x("//*[@id='userForm']");
+
+    public SelenideElement getUserForm() {
+        return userForm;
+    }
 
     public void openPage(String pageURL) {
         Configuration.pageLoadStrategy = "none";
