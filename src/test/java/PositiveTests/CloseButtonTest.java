@@ -4,8 +4,8 @@ import baseTest.BaseTest;
 import org.testng.annotations.Test;
 
 
-import static org.example.utils.TestData.*;
 import static org.example.AppConfig.baseUrl;
+import static org.example.utils.UserBuilder.user;
 
 public class CloseButtonTest extends BaseTest {
 
@@ -14,13 +14,13 @@ public class CloseButtonTest extends BaseTest {
         basePage.openPage(baseUrl);
 
         registrationPage
-                .setFirstName(validFirstName) //имя
-                .setLastName(validLastName) //фамилия
-                .setUserEmail(validEmail) //почта
-                .clickOnGender(gender) //пол
-                .setMobileNumber(mobileNumber) //мобильный номер
-                .setDateOfBirth(day, month, year) //год рождения
-                .setAddress(address) //адрес
+                .setFirstName(user.getValidFirstName()) //имя
+                .setLastName(user.getValidLastName()) //фамилия
+                .setUserEmail(user.getValidEmail()) //почта
+                .clickOnGender(user.getGender()) //пол
+                .setMobileNumber(user.getMobileNumber()) //мобильный номер
+                .setDateOfBirth(user.getDay(), user.getMonth(), user.getYear()) //год рождения
+                .setAddress(user.getAddress()) //адрес
                 .clickOnSubmit(); //жмем на кнопку отправки
 
         //проверка, что появилось модальное окно с заголовком и кнопкой закрыть

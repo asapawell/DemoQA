@@ -8,8 +8,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.example.utils.TestData.closeText;
-import static org.example.utils.TestData.modalTextHeader;
 
 //ResultPage не расширяет класс BasePage, т.к. не открывается новый урл
 public class ResultsPage {
@@ -18,8 +16,8 @@ public class ResultsPage {
     private final SelenideElement closeButton = $("#closeLargeModal");
 
     public void checkModalContent() {
-        modalContent.shouldBe(visible).shouldHave(text(modalTextHeader));
-        closeButton.shouldBe(visible).shouldHave(text(closeText));
+        modalContent.shouldBe(visible).shouldHave(text("Thanks for submitting the form"));
+        closeButton.shouldBe(visible).shouldHave(text("Close"));
     }
 
     public void clickOnClose() {
